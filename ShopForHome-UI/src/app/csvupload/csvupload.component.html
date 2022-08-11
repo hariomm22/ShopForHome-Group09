@@ -1,0 +1,19 @@
+<app-header></app-header>
+<!-- <div>
+    <h2>Upload Products CSV File</h2>
+    <form>
+        <label for="file">Select CSV File</label> <br>
+        <input type="file" name="file" id="file"> <br>
+        <button type="submit">Submit</button> <br>
+    </form>
+</div> -->
+
+<div class="col-sm-4 productForm">
+    <h4>Add Product</h4>
+    <form novalidate>
+      <div class="form-group">
+        <input type="file" class="form-control" (change)="saveFile($event)" accept=".csv" name="file" />
+      </div>
+      <input type="submit" value="Upload File" (click)="onUpload()" [disabled]="isFormValid()" class="btn btn-primary" />
+    </form>
+  </div>
