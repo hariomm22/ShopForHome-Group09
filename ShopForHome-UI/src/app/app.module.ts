@@ -26,6 +26,14 @@ import { ApiService } from './api.service';
 import { ProfileComponent } from './profile/profile.component';
 import { OrderhistoryComponent } from './orderhistory/orderhistory.component';
 import { AdminloginComponent } from './adminlogin/adminlogin.component';
+import { CsvuploadComponent } from './csvupload/csvupload.component';
+import { DiscountComponent } from './discount/discount.component';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
+import {MatIconModule} from '@angular/material/icon';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -44,7 +52,9 @@ import { AdminloginComponent } from './adminlogin/adminlogin.component';
     ViewcartComponent,
     ProfileComponent,
     OrderhistoryComponent,
-    AdminloginComponent
+    AdminloginComponent,
+    CsvuploadComponent,
+    DiscountComponent
   ],
   imports: [
     CommonModule,
@@ -53,6 +63,12 @@ import { AdminloginComponent } from './adminlogin/adminlogin.component';
     BrowserAnimationsModule, 
     HttpClientModule,
     ReactiveFormsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatInputModule,
+    MatIconModule,
+    MatButtonModule,
     ToastrModule.forRoot(), 
   ],
   providers: [ApiService],

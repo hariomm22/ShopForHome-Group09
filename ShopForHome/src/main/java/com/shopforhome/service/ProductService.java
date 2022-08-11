@@ -1,5 +1,6 @@
 package com.shopforhome.service;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.shopforhome.entity.Product;
+import com.shopforhome.helper.CsvHelper;
 import com.shopforhome.repository.ProductRepository;
 import com.shopforhome.utils.StorageService;
 
@@ -32,6 +34,19 @@ public class ProductService {
 	public void deleteProduct(int id) {
 		dao.deleteById(id);
 	}
+	
+	
+	public void saveCsv(MultipartFile file) {
+	    try {
+	      List<Product> products = CsvHelper.csvToProducts(file.getInputStream());
+	      System.out.println("inside cstp");
+	      dao.saveAll(products);
+	    } catch (IOException e) {
+	      throw new RuntimeException("fail to store csv data: " + e.getMessage());
+	    }
+	  }
+	
+	
 
 	public List<Product> allProducts() {
 		return dao.findAll();
@@ -48,4 +63,5 @@ public class ProductService {
 	public List<Product> categoryProducts(int catid) {
 		return dao.findByCategory(cdao.findById(catid));
 	}
+
 }

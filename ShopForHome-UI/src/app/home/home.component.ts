@@ -10,7 +10,7 @@ import { ApiService } from '../api.service';
 })
 export class HomeComponent implements OnInit {
 
-  list:any[]
+  listOfProducts:any[]
   constructor(private api:ApiService,private toast:ToastrService,
     private route:ActivatedRoute) { }
 
@@ -30,13 +30,13 @@ export class HomeComponent implements OnInit {
 
   loadsearchresult(search:string){
     this.api.searchproducts(search).subscribe({
-      next:resp=>this.list=resp
+      next:resp=>this.listOfProducts=resp
     })
   }
 
   loadcatlist(catid:number){
     this.api.catproducts(catid).subscribe({
-      next:resp=>this.list=resp
+      next:resp=>this.listOfProducts=resp
     })
   }
 
@@ -48,7 +48,9 @@ export class HomeComponent implements OnInit {
         next:resp=>{
           this.toast.success('Item added to cart')         
         },
-        error:err=>this.toast.error(err.error)
+        error:err=>{this.toast.error(err.error)
+        console.log(err.error);}
+        
       })
     }
   else
@@ -73,7 +75,7 @@ export class HomeComponent implements OnInit {
   loadData(){    
     this.api.listproducts().subscribe({
       next:resp=>{
-        this.list=resp;
+        this.listOfProducts=resp;
       }
     })
   }

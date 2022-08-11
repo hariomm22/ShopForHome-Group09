@@ -43,7 +43,7 @@ export class AdminloginComponent implements OnInit {
         sessionStorage.setItem("userid",resp.data.userid)
         sessionStorage.setItem("uname",resp.data.uname)
         sessionStorage.setItem("role","A")
-          this._router.navigate(['dashboard'])        
+          this._router.navigate(['products'])        
         },
       error:err=>{
         console.log(err)

@@ -14,38 +14,26 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let p of list">
+          <tr *ngFor="let cartProduct of productInCart">
             <td>
-              <img
-                src="http://localhost:8080/{{ p.product.photo }}"
-                style="width: 80px"
-                class="mr-2 float-left"
-              />{{ p.product.pname }}<br />
-              ({{ p.product.category.catname }})
+              <img src="http://localhost:8080/{{ cartProduct.product.photo }}" style="width: 80px" class="mr-2 float-left" />{{
+                cartProduct.product.pname }}<br />
+              ({{ cartProduct.product.category.catname }})
             </td>
-            <td>{{ p.product.price }}</td>
+            <td>{{ cartProduct.product.price - (cartProduct.product.price*discountPer/100) | number : '1.2-2'}}</td>
 
             <td>
-              <button
-                (click)="updateqty(p.id, p.qty - 1)"
-                class="btn btn-sm btn-info"
-              >
+              <button (click)="updateqty(cartProduct.id, cartProduct.qty - 1)" class="btn btn-sm btn-info">
                 -
               </button>
-              {{ p.qty }}
-              <button
-                (click)="updateqty(p.id, p.qty + 1)"
-                class="btn btn-sm btn-info"
-              >
+              {{ cartProduct.qty }}
+              <button (click)="updateqty(cartProduct.id, cartProduct.qty + 1)" class="btn btn-sm btn-info">
                 +
               </button>
             </td>
-            <td>{{ p.product.price * p.qty }}</td>
+            <td>{{ (cartProduct.product.price - (cartProduct.product.price*discountPer/100)) * cartProduct.qty | number : '1.2-2'}}</td>
             <td>
-              <button
-                (click)="removefromwishlist(p.id)"
-                class="btn btn-danger btn-sm"
-              >
+              <button (click)="removefromwishlist(cartProduct.id)" class="btn btn-danger btn-sm">
                 Remove
               </button>
             </td>
@@ -54,7 +42,7 @@
         <tfoot>
           <tr>
             <th>Total</th>
-            <th colspan="3" class="text-right">{{ total }}</th>
+            <th colspan="3" class="text-right">{{ total - (total*discountPer/100) | number : '1.2-2' }}</th>
           </tr>
         </tfoot>
       </table>
@@ -63,59 +51,45 @@
       <div class="card">
         <div class="card-body">
           <h5>Check Out</h5>
-          <form>
+          <form [formGroup]="couponForm">
             <div class="form-group">
               <label>Card No</label>
-              <input
-                type="text"
-                class="form-control"
-                maxlength="16"
-                placeholder="16-digit Card No"
-              />
+              <input type="text" class="form-control" maxlength="16" placeholder="16-digit Card No" />
             </div>
             <div class="form-group">
               <label>Name on Card</label>
-              <input
-                type="text"
-                class="form-control"
-                placeholder="Name on card"
-              />
+              <input type="text" class="form-control" placeholder="Name on card" />
             </div>
             <div class="form-group form-row">
               <div class="col-sm-6">
                 <label>Expiry Date</label>
-                <input
-                  type="month"
-                  class="form-control"
-                  placeholder="Name on card"
-                />
+                <input type="month" class="form-control" placeholder="Name on card" />
               </div>
               <div class="col-sm-6">
                 <label>CVV</label>
-                <input
-                  type="text"
-                  maxlength="3"
-                  class="form-control"
-                  placeholder="CVV"
-                />
+                <input type="text" maxlength="3" class="form-control" placeholder="CVV" />
               </div>
             </div>
             <div class="form-group">
               <label>Amount</label>
-              <input
-                type="text"
-                readonly
-                class="form-control"
-                value="{{ total }}"
-              />
+              <input type="text" readonly class="form-control" value="{{ total - (total*discountPer/100) | number : '1.2-2' }}" />
             </div>
-            <button
-              type="button"
-              (click)="placeorder(null)"
-              class="btn btn-success"
-            >
+            <button type="button" (click)="placeorder(null)" class="btn btn-success">
               Place Order
             </button>
+
+
+            <mat-form-field class="example-form-field" appearance="fill">
+              <input matInput type="text" formControlName="coupon" placeholder="Apply Coupon">
+              <button matSuffix mat-icon-button aria-label="Clear" color="primary" (click)="hello()">
+                Apply
+              </button>
+            </mat-form-field>
+
+
+            <!-- <span style="margin-left: 20px;">Apply Coupon</span> -->
+
+
           </form>
         </div>
       </div>

@@ -42,7 +42,11 @@ export class NavbarComponent implements OnInit {
 
   logout(){
     sessionStorage.clear();
-    this._router.navigate(['/'])
+    this._router.navigate(['']);
+    if(this.role==='U'){
+      // location.reload();
+      this._router.navigate(['']);
+    }
   }
 
 }

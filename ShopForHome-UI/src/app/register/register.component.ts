@@ -11,9 +11,9 @@ import { ApiService } from '../api.service';
 })
 export class RegisterComponent implements OnInit {
 submitted=false;
-  fg: FormGroup;
+  userRegisterForm: FormGroup;
   constructor(
-    private fb:FormBuilder,
+    private formBuilder:FormBuilder,
     private api:ApiService,
     private _router:Router,
     private toast:ToastrService
@@ -25,7 +25,7 @@ submitted=false;
   }
 
   createForm(){
-    this.fg=this.fb.group({
+    this.userRegisterForm=this.formBuilder.group({
       'userid':['',Validators.required],
       'name':['',Validators.required],
       'gender':['',Validators.required],
@@ -37,7 +37,7 @@ submitted=false;
 
   registeruser(values:any){
     this.submitted=true
-    if(this.fg.valid){
+    if(this.userRegisterForm.valid){
       console.log(values)
       this.api.register(values).subscribe({
         next:resp=>{

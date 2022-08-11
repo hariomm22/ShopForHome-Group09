@@ -8,7 +8,7 @@ import { ApiService } from '../api.service';
 })
 export class UsersComponent implements OnInit {
 
-  list:any[]
+  listOfUsers:any[]
   constructor(private api:ApiService) { }
 
   ngOnInit(): void {
@@ -17,7 +17,7 @@ export class UsersComponent implements OnInit {
 
   loadData(){
     this.api.listcustomers().subscribe({
-      next:resp=>this.list=resp
+      next:resp=>this.listOfUsers=resp
     })
   }
 }

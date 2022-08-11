@@ -12,9 +12,9 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let p of list">
-            <td>{{ p.orderid }}</td>
-            <td>{{ p.orderDate | date }}</td>
+          <tr *ngFor="let product of OrderedProducts">
+            <td>{{ product.orderid }}</td>
+            <td>{{ product.orderDate | date }}</td>
             <td>
               <table class="table table-sm">
                 <thead>
@@ -25,15 +25,15 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let od of p.orderdetails">
+                  <tr *ngFor="let productDetails of product.orderdetails">
                     <td>
                       <img
-                        src="http://localhost:8080/{{ od.product.photo }}"
+                        src="http://localhost:8080/{{ productDetails.product.photo }}"
                         style="width: 60px"
-                      />{{ od.product.pname }}
+                      />{{ productDetails.product.pname }}
                     </td>
-                    <td>{{ od.product.price }}</td>
-                    <td>{{ od.qty }}</td>
+                    <td>{{ productDetails.product.price }}</td>
+                    <td>{{ productDetails.qty }}</td>
                   </tr>
                 </tbody>
               </table>

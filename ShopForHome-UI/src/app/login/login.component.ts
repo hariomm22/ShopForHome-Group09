@@ -11,10 +11,10 @@ import { ApiService } from '../api.service';
 })
 export class LoginComponent implements OnInit {
   submitted=false;
-  fg: FormGroup;
+  loginForm: FormGroup;
   post:any='';
   constructor(
-    private fb:FormBuilder,
+    private formBuilder:FormBuilder,
     private api:ApiService,
     private _router:Router,
     private toast:ToastrService
@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   }
 
   createForm(){
-    this.fg=this.fb.group({
+    this.loginForm=this.formBuilder.group({
       'userid':['',Validators.required],
       'pwd':['',Validators.required],
     })
@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
   validate(values:any){
     this.submitted=true;
     //console.log(this.fg.valid)
-    if(this.fg.valid){
+    if(this.loginForm.valid){
       console.log(values)
       this.api.validate(values).subscribe({
         next:resp=>{
@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
         sessionStorage.setItem("userid",resp.data.userid)
         sessionStorage.setItem("uname",resp.data.name)
         sessionStorage.setItem("role","U")
-          this._router.navigate(['profile'])
+          this._router.navigate([''])
         },
       error:err=>{
         console.log(err)

@@ -14,12 +14,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let p of list">
-            <td>{{ p.name }}</td>
-            <td>{{ p.city }}</td>
-            <td>{{ p.gender }}</td>
-            <td>{{ p.userid }}</td>
-            <td>{{ p.phone }}</td>
+          <tr *ngFor="let user of listOfUsers">
+            <td>{{ user.name }}</td>
+            <td>{{ user.city }}</td>
+            <td>{{ user.gender }}</td>
+            <td>{{ user.userid }}</td>
+            <td>{{ user.phone }}</td>
           </tr>
         </tbody>
       </table>

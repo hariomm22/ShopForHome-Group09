@@ -1,3 +1,5 @@
+import { DiscountComponent } from './discount/discount.component';
+import { CsvuploadComponent } from './csvupload/csvupload.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminloginComponent } from './adminlogin/adminlogin.component';
@@ -28,6 +30,8 @@ const routes: Routes = [
   {path:'viewcart',component:ViewcartComponent},
   {path:'history',component:OrderhistoryComponent},
   {path:'admin',component:AdminloginComponent},
+  {path:'bulkupload',component:CsvuploadComponent},
+  {path:'discount',component:DiscountComponent}
 ];
 
 @NgModule({

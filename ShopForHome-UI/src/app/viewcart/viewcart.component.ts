@@ -1,3 +1,5 @@
+import { DiscountService } from './../discount.service';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -10,12 +12,28 @@ import { ApiService } from '../api.service';
 })
 export class ViewcartComponent implements OnInit {
   total:number=0;
-  list:any[]
+  productInCart:any[]
+  value = '';
   constructor(private api:ApiService,private toast:ToastrService,
-    private route:Router) { }
+    private route:Router , private formBuilder:FormBuilder,private discountService:DiscountService) { }
 
+  couponForm:FormGroup;
   ngOnInit(): void {
     this.loadData()
+     this.couponForm = this.formBuilder.group({
+      'coupon':['']
+     })
+  }
+  discountPer=0;
+  hello(){
+    console.log(this.couponForm.value['coupon']);
+    this.discountService.getByCouponCode(this.couponForm.value['coupon']).subscribe((response:any)=>{
+      console.log(response);
+      this.discountPer=response.discountPer;
+    },(error)=>{
+      console.log(error);
+      
+    })
   }
 
   removefromwishlist(id:number){
@@ -54,7 +72,7 @@ export class ViewcartComponent implements OnInit {
   loadData(){
     this.api.getcart(sessionStorage.getItem('id')).subscribe({
       next:resp=>{
-        this.list=resp
+        this.productInCart=resp
         this.total=resp.reduce((sum,x)=>sum+x.qty*x.product.price,0)
       }
     })

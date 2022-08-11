@@ -9,7 +9,7 @@ import { ApiService } from '../api.service';
 })
 export class WishlistComponent implements OnInit {
 
-  list:any[]
+  productInWishlist:any[]
   constructor(private api:ApiService,private toast:ToastrService) { }
 
   ngOnInit(): void {
@@ -27,7 +27,7 @@ export class WishlistComponent implements OnInit {
 
   loadData(){
     this.api.getwishlist(sessionStorage.getItem('id')).subscribe({
-      next:resp=>this.list=resp
+      next:resp=>this.productInWishlist=resp
     })
   }
 }

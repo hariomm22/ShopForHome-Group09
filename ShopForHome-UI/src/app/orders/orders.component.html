@@ -1,8 +1,14 @@
 <app-header></app-header>
+<div class="sale-report">
+  <p>Download Sales Report PDF</p>
+  <!-- <button mat-raised-button color="accent" (click)="makePDF()">Download</button> -->
+  <button (click)="makePDF()">download</button>
+</div>
+<!-- <button (click)="makePDF()">download</button> -->
 <div class="container-fluid">
   <h4>Orders</h4>
   <div class="row">
-    <div class="col-sm-10">
+    <div class="col-sm-10" id="content" #content>
       <table class="table table-bordered table-sm">
         <thead>
           <tr>
@@ -13,10 +19,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let p of list">
-            <td>{{ p.orderid }}</td>
-            <td>{{ p.customer.name }}</td>
-            <td>{{ p.orderDate | date }}</td>
+          <tr *ngFor="let product of listOrderedProduct">
+            <td>{{ product.orderid }}</td>
+            <td>{{ product.customer.name }}</td>
+            <td>{{ product.orderDate | date }}</td>
             <td>
               <table class="table table-sm">
                 <thead>
@@ -24,18 +30,20 @@
                     <th>Product</th>
                     <th>Price</th>
                     <th>Qty</th>
+                    <th>Total Amount </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let od of p.orderdetails">
+                  <tr *ngFor="let productDetails of product.orderdetails">
                     <td>
                       <img
-                        src="http://localhost:8080/{{ od.product.photo }}"
+                        src="http://localhost:8080/{{ productDetails.product.photo }}"
                         style="width: 60px"
-                      />{{ od.product.pname }}
+                      />{{ productDetails.product.pname }}
                     </td>
-                    <td>{{ od.product.price }}</td>
-                    <td>{{ od.qty }}</td>
+                    <td>{{ productDetails.product.price }}</td>
+                    <td>{{ productDetails.qty }}</td>
+                    <td>{{ productDetails.qty * productDetails.product.price }}</td>
                   </tr>
                 </tbody>
               </table>

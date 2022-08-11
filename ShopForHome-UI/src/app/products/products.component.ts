@@ -28,6 +28,13 @@ export class ProductsComponent implements OnInit {
     this.loadData()
   }
 
+  isFormValid(){
+    if(this.fg.valid){
+      return false;
+    }
+    return true;
+  }
+
   loadData(){
     this.api.listcategories().subscribe({
       next:resp=>this.cats=resp

@@ -8,7 +8,7 @@ import { ApiService } from '../api.service';
 })
 export class OrderhistoryComponent implements OnInit {
 
-   list:any[]
+  OrderedProducts:any[]
   constructor(private api:ApiService) { }
 
   ngOnInit(): void {
@@ -18,7 +18,7 @@ export class OrderhistoryComponent implements OnInit {
    loadData(){
     this.api.orderhistory(sessionStorage.getItem('id')).subscribe({
       next:resp=>{
-        this.list=resp       
+        this.OrderedProducts=resp       
       }
     })
   }

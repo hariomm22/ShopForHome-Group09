@@ -27,7 +27,7 @@ api_URL:string="http://localhost:8080/api/";
   }
 
   deletecategory(id:number){
-    return this.http.delete<any>(this.api_URL+"categories/"+id)
+    return this.http.delete<any>(this.api_URL+"categories/"+id);
   }
 
   //customer
@@ -107,4 +107,12 @@ api_URL:string="http://localhost:8080/api/";
   allorders(){
     return this.http.get<any[]>(this.api_URL+"orders");
   }
+
+
+  uploadFile(file:File){
+    const formData = new FormData(); 
+    formData.append("file",file);
+    return this.http.post(this.api_URL+"products/bulk",formData);
+  }
+
 }

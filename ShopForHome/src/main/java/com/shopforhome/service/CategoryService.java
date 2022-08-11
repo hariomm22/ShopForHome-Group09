@@ -26,6 +26,10 @@ public class CategoryService {
 		return repo.findById(id).orElse(null);
 	}
 	
+	public Category findForCsv(int id) {
+		return repo.findForCsv(id);
+	}
+	
 	public void deleteCategory(int id) {
 		repo.deleteById(id);
 	}

@@ -14,20 +14,20 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let p of list">
+          <tr *ngFor="let wishlistProduct of productInWishlist">
             <td>
               <img
-                src="http://localhost:8080/{{ p.product.photo }}"
+                src="http://localhost:8080/{{ wishlistProduct.product.photo }}"
                 style="width: 80px"
                 class="mr-2"
-              />{{ p.product.pname }}
+              />{{ wishlistProduct.product.pname }}
             </td>
-            <td>{{ p.product.category.catname }}</td>
-            <td>{{ p.product.descr }}</td>
-            <td>{{ p.product.price }}</td>
+            <td>{{ wishlistProduct.product.category.catname }}</td>
+            <td>{{ wishlistProduct.product.descr }}</td>
+            <td>{{ wishlistProduct.product.price }}</td>
             <td>
               <button
-                (click)="removefromwishlist(p.id)"
+                (click)="removefromwishlist(wishlistProduct.id)"
                 class="btn btn-danger btn-sm"
               >
                 Remove
